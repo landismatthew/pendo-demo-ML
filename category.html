@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category - News</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+    (function(apiKey){
+        (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
+        v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
+            o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+            y=e.createElement(n);y.async=!0;y.src='https://pendo-io-static.storage.googleapis.com/agent/static/'+apiKey+'/pendo.js';
+            z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+        
+        pendo.initialize({
+            visitor: {
+                id: 'VISITOR-UNIQUE-ID'
+            },
+            account: {
+                id: 'ACCOUNT-UNIQUE-ID'
+            }
+        });
+    })('74e93b97-3690-4ecc-8f75-b60ce0eae6c7');
+    </script>
+    <script>
+        // Force send test data to Pendo
+        let testCounter = 0;
+        
+        setInterval(() => {
+            if (typeof pendo !== 'undefined' && testCounter < 5) {
+                testCounter++;
+                
+                // Send test event
+                pendo.track('test_event_' + testCounter, {
+                    eventNumber: testCounter,
+                    timestamp: new Date().toISOString(),
+                    page: window.location.pathname,
+                    testData: 'This is test metadata ' + testCounter
+                });
+                
+                console.log('📊 Sent test event #' + testCounter);
+                
+                // Update visitor with more metadata
+                pendo.identify({
+                    visitor: {
+                        id: sessionStorage.getItem('pendo-visitor-id'),
+                        lastActivity: new Date().toISOString(),
+                        eventsGenerated: testCounter,
+                        testMetadata: 'Updated at ' + new Date().toTimeString()
+                    }
+                });
+                
+                console.log('🔄 Updated visitor metadata');
+            }
+        }, 5000); // Every 5 seconds
+        </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Left: Search Bar -->
+                <div class="search-section">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Center: Logo -->
+                <div class="logo">
+                    <h1><a href="index.html">Logo</a></h1>
+                </div>
+                
+                <!-- Right: Sign in and Subscribe Buttons -->
+                <div class="header-actions">
+                    <button class="login-btn">Sign in</button>
+                    <button class="orders-btn">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navigation">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">LATEST</a></li>
+                <li><a href="category.html?cat=world" class="nav-link">WORLD</a></li>
+                <li><a href="category.html?cat=sports" class="nav-link">SPORTS</a></li>
+                <li><a href="category.html?cat=culture" class="nav-link">CULTURE</a></li>
+                <li><a href="category.html?cat=economy" class="nav-link">ECONOMY</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content container">
+        <!-- Category Header -->
+        <section class="category-header">
+            <h1 class="category-title" id="categoryTitle">Latest</h1>
+                         <p class="category-description" id="categoryDescription">
+                 Stay up-to-date with the most recent breaking news and current events from around the world.
+             </p>
+        </section>
+
+        <!-- Articles Grid -->
+        <section class="articles-grid" id="categoryArticles">
+            <!-- Articles will be dynamically loaded here -->
+        </section>
+
+        <!-- Load More Button -->
+        <div class="load-more-container">
+            <button class="load-more">Load more</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Logo -->
+                <div class="footer-logo">
+                    <h3>Logo</h3>
+                </div>
+                
+                <!-- Social Media Icons -->
+                <div class="social-media">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <!-- Footer Links -->
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">Authors</a>
+                    <a href="#">Archive</a>
+                    <a href="#">Terms and Conditions</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Category data
+        const categoryData = {
+            latest: {
+                title: 'Latest',
+                description: 'Stay up-to-date with the most recent breaking news and current events from around the world.'
+            },
+            world: {
+                title: 'World',
+                description: 'Stay informed with the latest international news, political developments, and global events that shape our world.'
+            },
+            sports: {
+                title: 'Sports', 
+                description: 'Stay updated with the latest sports news, scores, and analysis from around the world.'
+            },
+            culture: {
+                title: 'Culture',
+                description: 'Welcome to the Culture section of our news, where we explore the latest trends and topics in art, music, film, literature, and more. From groundbreaking exhibitions and performances to up-and-coming artists and cultural events, we aim to provide you with a diverse range of stories that showcase the richness and diversity of our world\'s creative landscape.'
+            },
+            economy: {
+                title: 'Economy',
+                description: 'Stay up-to-date with the latest economic news, market trends, and financial insights.'
+            }
+        };
+
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Function to update page content based on category
+        function updateCategoryContent() {
+            const category = getUrlParameter('cat') || 'latest';
+            const categoryInfo = categoryData[category] || categoryData.latest;
+            
+            // Update page title
+            document.title = `${categoryInfo.title} - News`;
+            
+            // Update category title
+            document.getElementById('categoryTitle').textContent = categoryInfo.title;
+            
+            // Update category description
+            document.getElementById('categoryDescription').textContent = categoryInfo.description;
+            
+            // Update navigation active state
+            updateNavigationActiveState(category);
+            
+            // Load articles for the category
+            loadCategoryArticles(category);
+        }
+
+        // Function to update navigation active state
+        function updateNavigationActiveState(category) {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                // Check if the link href contains the category parameter
+                if (link.href.includes(`cat=${category}`)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Function to create article card
+        function createArticleCard(article) {
+            return `
+                <article class="article-card">
+                    <a href="article.html" class="article-link">
+                        <div class="article-image">
+                            <div class="image-placeholder">Image Placeholder</div>
+                        </div>
+                        <div class="article-content">
+                            <div class="category-tag">${article.category}</div>
+                            <h3 class="article-headline">Lost cat found the way back to her home</h3>
+                            <div class="article-meta">
+                                <span class="date">17 June 2022</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            `;
+        }
+
+        // Function to load category articles
+        function loadCategoryArticles(category) {
+            const articlesContainer = document.getElementById('categoryArticles');
+            
+            // Sample articles data (in a real app, this would come from an API)
+            const articles = [
+                { category: 'WORLD', headline: 'Lost cat found the way back to her home', date: '17 June 2022' },
+                { category: 'SPORTS', headline: 'Lost cat found the way back to her home', date: '17 June 2022' },
+                { category: 'CULTURE', headline: 'Lost cat found the way back to her home', date: '17 June 2022' },
+                { category: 'ECONOMY', headline: 'Lost cat found the way back to her home', date: '17 June 2022' },
+                { category: 'WORLD', headline: 'Lost cat found the way back to her home', date: '17 June 2022' },
+                { category: 'SPORTS', headline: 'Lost cat found the way back to her home', date: '17 June 2022' },
+                { category: 'CULTURE', headline: 'Lost cat found the way back to her home', date: '17 June 2022' },
+                { category: 'ECONOMY', headline: 'Lost cat found the way back to her home', date: '17 June 2022' }
+            ];
+            
+            // Clear existing articles
+            articlesContainer.innerHTML = '';
+            
+            // Add articles to the grid
+            articles.forEach(article => {
+                articlesContainer.innerHTML += createArticleCard(article);
+            });
+            
+            // Add click interactions to articles
+            addArticleInteractions();
+        }
+
+        // Function to add article interactions
+        function addArticleInteractions() {
+            const articleCards = document.querySelectorAll('.article-card');
+            articleCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Navigate to article page
+                    window.location.href = 'article.html';
+                });
+            });
+        }
+
+        // Function to handle load more button
+        function handleLoadMore() {
+            // In a real app, this would load more articles from an API
+            console.log('Loading more articles...');
+            // For now, just show a notification
+            alert('Load more functionality would be implemented here');
+        }
+
+        // Initialize page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCategoryContent();
+            
+            // Add event listener to load more button
+            const loadMoreBtn = document.querySelector('.load-more');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', handleLoadMore);
+            }
+        });
+    </script>
+<script>
+    // Pendo initialization code
+    const getVisitorId = () => {
+        let visitorId = sessionStorage.getItem('pendo-visitor-id');
+        if (!visitorId) {
+            visitorId = 'visitor-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+            sessionStorage.setItem('pendo-visitor-id', visitorId);
+        }
+        return visitorId;
+    };
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Wait a bit for Pendo to load
+        setTimeout(() => {
+            if (typeof pendo !== 'undefined') {
+                pendo.initialize({
+                    visitor: {
+                        id: getVisitorId(),
+                        email: 'anonymous@newswebsite.com',
+                        role: 'reader',
+                        visitType: sessionStorage.getItem('returning-user') ? 'returning' : 'new',
+                        currentPage: window.location.pathname
+                    },
+                    account: {
+                        id: 'news-website-demo',
+                        name: 'News Website',
+                        planLevel: 'free',
+                        creationDate: new Date().toISOString().split('T')[0]
+                    }
+                });
+                
+                sessionStorage.setItem('returning-user', 'true');
+                console.log('Pendo initialized successfully');
+            } else {
+                console.log('Pendo not loaded yet');
+            }
+        }, 1000);
+    });
+    </script></body>
+</html>

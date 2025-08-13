@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News - Latest Breaking News</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        (function(apiKey){
+            (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
+            v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
+                o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+                y=e.createElement(n);y.async=!0;y.src='https://pendo-io-static.storage.googleapis.com/agent/static/'+apiKey+'/pendo.js';
+                z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+            
+            pendo.initialize({
+                visitor: {
+                    id: 'VISITOR-UNIQUE-ID'
+                },
+                account: {
+                    id: 'ACCOUNT-UNIQUE-ID'
+                }
+            });
+        })('74e93b97-3690-4ecc-8f75-b60ce0eae6c7');
+        </script>
+        <script>
+            // Force send test data to Pendo
+            let testCounter = 0;
+            
+            setInterval(() => {
+                if (typeof pendo !== 'undefined' && testCounter < 5) {
+                    testCounter++;
+                    
+                    // Send test event
+                    pendo.track('test_event_' + testCounter, {
+                        eventNumber: testCounter,
+                        timestamp: new Date().toISOString(),
+                        page: window.location.pathname,
+                        testData: 'This is test metadata ' + testCounter
+                    });
+                    
+                    console.log('📊 Sent test event #' + testCounter);
+                    
+                    // Update visitor with more metadata
+                    pendo.identify({
+                        visitor: {
+                            id: sessionStorage.getItem('pendo-visitor-id'),
+                            lastActivity: new Date().toISOString(),
+                            eventsGenerated: testCounter,
+                            testMetadata: 'Updated at ' + new Date().toTimeString()
+                        }
+                    });
+                    
+                    console.log('🔄 Updated visitor metadata');
+                }
+            }, 5000); // Every 5 seconds
+            </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Left: Search Bar -->
+                <div class="search-section">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Center: Logo -->
+                <div class="logo">
+                    <h1>Logo</h1>
+                </div>
+                
+                <!-- Right: Login and Orders Buttons -->
+                <div class="header-actions">
+                    <button class="login-btn">LOG IN</button>
+                    <button class="orders-btn">ORDERS</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navigation">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="category.html?cat=latest" class="nav-link active">LATEST</a></li>
+                <li><a href="category.html?cat=world" class="nav-link">WORLD</a></li>
+                <li><a href="category.html?cat=sports" class="nav-link">SPORTS</a></li>
+                <li><a href="category.html?cat=culture" class="nav-link">CULTURE</a></li>
+                <li><a href="category.html?cat=economy" class="nav-link">ECONOMY</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Top Row: 3 articles side by side (equal width) -->
+            <div class="top-row">
+                <article class="top-article">
+                    <a href="article.html" class="article-link">
+                        <div class="article-image">Image Placeholder</div>
+                        <div class="article-content">
+                            <div class="category-tag">NEWS</div>
+                            <h3 class="article-headline">Lost cat found the way back to her home</h3>
+                            <div class="article-meta">
+                                <span class="author">By John Smith</span>
+                                <span class="date">17 June 2022</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="top-article">
+                    <a href="article.html" class="article-link">
+                        <div class="article-image">Image Placeholder</div>
+                        <div class="article-content">
+                            <div class="category-tag">SPORTS</div>
+                            <h3 class="article-headline">Lost cat found the way back to her home</h3>
+                            <div class="article-meta">
+                                <span class="author">By Sarah Johnson</span>
+                                <span class="date">17 June 2022</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="top-article">
+                    <a href="article.html" class="article-link">
+                        <div class="article-image">Image Placeholder</div>
+                        <div class="article-content">
+                            <div class="category-tag">CULTURE</div>
+                            <h3 class="article-headline">Lost cat found the way back to her home</h3>
+                            <div class="article-meta">
+                                <span class="author">By Mike Davis</span>
+                                <span class="date">17 June 2022</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+
+            <!-- Middle Row: 1 large article (left 2/3) + 1 small article (right 1/3) -->
+            <div class="middle-row">
+                <article class="middle-large">
+                    <a href="article.html" class="article-link">
+                        <div class="article-image">Image Placeholder</div>
+                        <div class="article-content">
+                            <div class="category-tag">ECONOMY</div>
+                            <h2 class="article-headline">Lost cat found the way back to her home</h2>
+                            <div class="article-meta">
+                                <span class="author">By Lisa Brown</span>
+                                <span class="date">17 June 2022</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="middle-small">
+                    <a href="article.html" class="article-link">
+                        <div class="article-image">Image Placeholder</div>
+                        <div class="article-content">
+                            <div class="category-tag">WORLD</div>
+                            <h3 class="article-headline">Lost cat found the way back to her home</h3>
+                            <div class="article-meta">
+                                <span class="author">By Tom Wilson</span>
+                                <span class="date">17 June 2022</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+
+            <!-- Bottom Row: 1 article (spans full width) -->
+            <div class="bottom-row">
+                <article class="bottom-full">
+                    <a href="article.html" class="article-link">
+                        <div class="article-image">Image Placeholder</div>
+                        <div class="article-content">
+                            <div class="category-tag">TECHNOLOGY</div>
+                            <h2 class="article-headline">Lost cat found the way back to her home</h2>
+                            <div class="article-meta">
+                                <span class="author">By Emma Thompson</span>
+                                <span class="date">17 June 2022</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Logo -->
+                <div class="footer-logo">
+                    <h3>Logo</h3>
+                </div>
+                
+                <!-- Social Media Icons -->
+                <div class="social-media">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <!-- Footer Links -->
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">Authors</a>
+                    <a href="#">Archive</a>
+                    <a href="#">Terms and Conditions</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Pendo initialization code
+        const getVisitorId = () => {
+            let visitorId = sessionStorage.getItem('pendo-visitor-id');
+            if (!visitorId) {
+                visitorId = 'visitor-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+                sessionStorage.setItem('pendo-visitor-id', visitorId);
+            }
+            return visitorId;
+        };
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait a bit for Pendo to load
+            setTimeout(() => {
+                if (typeof pendo !== 'undefined') {
+                    pendo.initialize({
+                        visitor: {
+                            id: getVisitorId(),
+                            email: 'anonymous@newswebsite.com',
+                            role: 'reader',
+                            visitType: sessionStorage.getItem('returning-user') ? 'returning' : 'new',
+                            currentPage: window.location.pathname
+                        },
+                        account: {
+                            id: 'news-website-demo',
+                            name: 'News Website',
+                            planLevel: 'free',
+                            creationDate: new Date().toISOString().split('T')[0]
+                        }
+                    });
+                    
+                    sessionStorage.setItem('returning-user', 'true');
+                    console.log('Pendo initialized successfully');
+                } else {
+                    console.log('Pendo not loaded yet');
+                }
+            }, 1000);
+        });
+        </script>
+</body>
+</html>
